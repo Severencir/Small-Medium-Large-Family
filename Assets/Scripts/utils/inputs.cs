@@ -793,6 +793,34 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MouseCapture"",
+            ""id"": ""4bf5e195-c9c0-4bb1-8e7e-f3370f5dfe21"",
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""b715a8d7-0ca0-4474-8d36-34c5d621d6c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""afad28ea-1350-4dd3-8c5d-99b9a4cc4bef"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -875,6 +903,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // MouseCapture
+        m_MouseCapture = asset.FindActionMap("MouseCapture", throwIfNotFound: true);
+        m_MouseCapture_Escape = m_MouseCapture.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1084,6 +1115,39 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // MouseCapture
+    private readonly InputActionMap m_MouseCapture;
+    private IMouseCaptureActions m_MouseCaptureActionsCallbackInterface;
+    private readonly InputAction m_MouseCapture_Escape;
+    public struct MouseCaptureActions
+    {
+        private @Inputs m_Wrapper;
+        public MouseCaptureActions(@Inputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_MouseCapture_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_MouseCapture; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MouseCaptureActions set) { return set.Get(); }
+        public void SetCallbacks(IMouseCaptureActions instance)
+        {
+            if (m_Wrapper.m_MouseCaptureActionsCallbackInterface != null)
+            {
+                @Escape.started -= m_Wrapper.m_MouseCaptureActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_MouseCaptureActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_MouseCaptureActionsCallbackInterface.OnEscape;
+            }
+            m_Wrapper.m_MouseCaptureActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
+            }
+        }
+    }
+    public MouseCaptureActions @MouseCapture => new MouseCaptureActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1147,5 +1211,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IMouseCaptureActions
+    {
+        void OnEscape(InputAction.CallbackContext context);
     }
 }
