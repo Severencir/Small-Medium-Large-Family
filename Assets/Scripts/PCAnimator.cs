@@ -9,8 +9,7 @@ public class PCAnimator : VariableGrabber
     protected override void OnUpdate()
     {
         // This handles the jump animation
-        Vector3 tempSpeed = PlayerVelocity;
-        tempSpeed.y = 0;
+        Vector3 tempSpeed = new(PlayerVelocity.x, 0, PlayerVelocity.z);
         animator.SetFloat("Speed", tempSpeed.magnitude);
 
         //This handles the attacking animation
@@ -18,7 +17,7 @@ public class PCAnimator : VariableGrabber
 
         //This handles the death animation
         animator.SetBool("IsDead", IsDead);
-
+        
         //This handles the jumping animation
         animator.SetBool("IsJumping", IsJumping);
 
