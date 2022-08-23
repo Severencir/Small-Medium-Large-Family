@@ -31,6 +31,7 @@ public class VariableGrabber : MonoBehaviour
         playerJump = player.GetComponent<PlayerJump>();
         playerPosition = player.transform.position;
         playerVelocity = playerRigidBody.velocity;
+        OnStart();
     }
 
     private void Update()
@@ -38,5 +39,15 @@ public class VariableGrabber : MonoBehaviour
         playerPosition = transform.position;
         playerVelocity = playerRigidBody.velocity;
         isJumping = playerJump.IsJumping;
+        OnUpdate();
+    }
+
+    protected virtual void OnUpdate()
+    {
+
+    }
+    protected virtual void OnStart()
+    {
+
     }
 }
