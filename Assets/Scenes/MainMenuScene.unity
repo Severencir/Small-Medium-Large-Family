@@ -727,7 +727,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Thou art nought by thineself
+  m_Text: "Thou art not \nby thineself"
 --- !u!222 &469412221
 CanvasRenderer:
   m_ObjectHideFlags: 0
