@@ -11,7 +11,7 @@ public partial class FollowPlayerSystem : SystemBase
 
         Entities.WithAll<FollowPlayerTag>().ForEach((ref Translation trans) =>
         {
-            trans.Value = playerPos;
+            trans.Value = playerPos + new float3(0, 0.5f, 0);
 
         }).Schedule();
 	}

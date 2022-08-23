@@ -17,7 +17,7 @@ public class PlayerJump : MonoBehaviour
     float extraGravity;
     private void Start()
     {
-        extraGravity = 3 * 9.81f;
+        extraGravity = extraGravityFactor * 9.81f;
         rb = GetComponent<Rigidbody>();
         isJumping = false;
     }
