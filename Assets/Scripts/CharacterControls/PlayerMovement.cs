@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     float timer = 0;
     Vector3 lastTargetVelocity;
     Vector3 startVelocity;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -55,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         velocity = Vector3.Lerp(startVelocity, targetVelocity, timer / smoothing);
 
         rb.velocity = new(velocity.x, rb.velocity.y, velocity.z);
-
         lastTargetVelocity = targetVelocity;
     }
 }
