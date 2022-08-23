@@ -1,3 +1,4 @@
+using CodeMonkey.HealthSystemCM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class Fireball : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            hit.collider.GetComponent<Enemy>().TakeDamage(damage);
+            hit.collider.GetComponent<HealthSystemComponent>().GetHealthSystem().Damage(damage);
         }
         Destroy(gameObject);
     }

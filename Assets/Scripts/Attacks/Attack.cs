@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour
 
     void FireBall()
     {
-        GameObject fireBall = Instantiate(fireBallPrefab, transform.position + new Vector3(0.5f,0.5f,0.5f), transform.rotation);
+        GameObject fireBall = Instantiate(fireBallPrefab, transform.position + new Vector3(0.5f,0.5f,0.25f), transform.rotation);
         fireBall.GetComponent<Rigidbody>().velocity = transform.forward * fireBallSpeed;
         Fireball comp = fireBall.GetComponent<Fireball>();
         comp.damage = fireBallDamage;

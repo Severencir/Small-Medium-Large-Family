@@ -1,15 +1,23 @@
+using CodeMonkey.HealthSystemCM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float hp = 100;
+    HealthSystem healthSystem;
 
-    public void TakeDamage(int damage)
+    private void Start()
     {
-        hp -= damage;
-        if (hp <= 0)
+        if (HealthSystem.TryGetHealthSystem(gameObject, out HealthSystem healthSystem))
+        {
+            this.healthSystem = healthSystem;
+        }
+    }
+
+    private void Update()
+    {
+        if (healthSystem.IsDead())
         {
             Destroy(gameObject);
         }
