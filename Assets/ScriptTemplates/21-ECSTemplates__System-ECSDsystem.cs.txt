@@ -1,0 +1,16 @@
+using Unity.Entities;
+using Unity.Collections;
+using Unity.Transforms;
+using Unity.Mathematics;
+
+public partial class #SCRIPTNAME# : SystemBase
+{
+    protected override void OnUpdate()
+    {
+        Entities.ForEach((Entity e) =>
+        {
+            #NOTRIM#
+
+        }).Schedule();
+	}
+}

@@ -53,6 +53,15 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""33b3c6fd-8bc0-44a1-9890-202b36a7ce56"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -273,6 +282,28 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34780a85-9fcf-4fdd-a190-f7f104791dee"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a91dc2f-bf72-477d-a833-1d37c6347eb5"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -821,6 +852,34 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TestControls"",
+            ""id"": ""6ab5698b-d2ee-48bf-b482-92946106107c"",
+            ""actions"": [
+                {
+                    ""name"": ""SpawnSprite"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f64fa0f-53b5-4c17-8330-f90a393c30b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""039fe21c-c285-43d0-a7c7-48068155c5af"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SpawnSprite"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -891,6 +950,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -906,6 +966,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         // MouseCapture
         m_MouseCapture = asset.FindActionMap("MouseCapture", throwIfNotFound: true);
         m_MouseCapture_Escape = m_MouseCapture.FindAction("Escape", throwIfNotFound: true);
+        // TestControls
+        m_TestControls = asset.FindActionMap("TestControls", throwIfNotFound: true);
+        m_TestControls_SpawnSprite = m_TestControls.FindAction("SpawnSprite", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -968,6 +1031,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @Inputs m_Wrapper;
@@ -975,6 +1039,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -993,6 +1058,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1006,6 +1074,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -1148,6 +1219,39 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         }
     }
     public MouseCaptureActions @MouseCapture => new MouseCaptureActions(this);
+
+    // TestControls
+    private readonly InputActionMap m_TestControls;
+    private ITestControlsActions m_TestControlsActionsCallbackInterface;
+    private readonly InputAction m_TestControls_SpawnSprite;
+    public struct TestControlsActions
+    {
+        private @Inputs m_Wrapper;
+        public TestControlsActions(@Inputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SpawnSprite => m_Wrapper.m_TestControls_SpawnSprite;
+        public InputActionMap Get() { return m_Wrapper.m_TestControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestControlsActions set) { return set.Get(); }
+        public void SetCallbacks(ITestControlsActions instance)
+        {
+            if (m_Wrapper.m_TestControlsActionsCallbackInterface != null)
+            {
+                @SpawnSprite.started -= m_Wrapper.m_TestControlsActionsCallbackInterface.OnSpawnSprite;
+                @SpawnSprite.performed -= m_Wrapper.m_TestControlsActionsCallbackInterface.OnSpawnSprite;
+                @SpawnSprite.canceled -= m_Wrapper.m_TestControlsActionsCallbackInterface.OnSpawnSprite;
+            }
+            m_Wrapper.m_TestControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SpawnSprite.started += instance.OnSpawnSprite;
+                @SpawnSprite.performed += instance.OnSpawnSprite;
+                @SpawnSprite.canceled += instance.OnSpawnSprite;
+            }
+        }
+    }
+    public TestControlsActions @TestControls => new TestControlsActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1198,6 +1302,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1215,5 +1320,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     public interface IMouseCaptureActions
     {
         void OnEscape(InputAction.CallbackContext context);
+    }
+    public interface ITestControlsActions
+    {
+        void OnSpawnSprite(InputAction.CallbackContext context);
     }
 }
