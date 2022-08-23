@@ -6,14 +6,20 @@ public class PlayerJump : MonoBehaviour
 {
     Rigidbody rb;
     bool canJump = false;
-    public float jumpSpeed = 20f;
-    public float extraGravityFactor = 3;
-    public float fastDrop = 2f;
+    bool isJumping = false;
+    public bool IsJumping { get { return isJumping; } }
+    [SerializeField]
+    float jumpSpeed = 20f;
+    [SerializeField]
+    float extraGravityFactor = 3;
+    [SerializeField]
+    float fastDrop = 2f;
     float extraGravity;
     private void Start()
     {
         extraGravity = 3 * 9.81f;
         rb = GetComponent<Rigidbody>();
+        isJumping = false;
     }
     private void Update()
     {
@@ -21,6 +27,7 @@ public class PlayerJump : MonoBehaviour
         if (Mathf.Abs(rb.velocity.y) < 0.000001f)
         {
             canJump = true;
+            isJumping = false;
         }
         else
         {
@@ -31,6 +38,7 @@ public class PlayerJump : MonoBehaviour
         if (jumpPress && canJump)
         {
             rb.velocity = new(rb.velocity.x, jumpSpeed, rb.velocity.z);
+            isJumping = true;
         }
         if (rb.velocity.y < fastDrop)
         {
