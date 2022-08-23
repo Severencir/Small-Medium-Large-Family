@@ -25,7 +25,6 @@ public class PCAnimator : VariableGrabber
         animator.SetBool("IsDead", IsDead);
 
         //This is where the character is dead animation should go
-        print(IsJumping);
     }
 
 

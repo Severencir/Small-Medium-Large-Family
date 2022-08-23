@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 6508203339127501296}
   - component: {fileID: 6842413587373855572}
   - component: {fileID: 1593724203}
+  - component: {fileID: 1283111438}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -468,6 +469,20 @@ CapsuleCollider:
   m_Height: 1.01
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1283111438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2496913026672819850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2deea6c1126b99d4aa8bd1e43870a7c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireBallPrefab: {fileID: 3725869484202690651, guid: f8d217d53f8a0074eb8114cc241ad9b5,
+    type: 3}
 --- !u!1 &2693484782187028058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,7 +1623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521116787170543231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -3}
+  m_LocalPosition: {x: 0, y: 1.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1737,7 +1752,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521116787497256622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

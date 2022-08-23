@@ -6,6 +6,5 @@ public struct OrbitData : IComponentData
 {
     public float a;
     public float b;
-    public float speed;
-   
+    public int frames;
 }

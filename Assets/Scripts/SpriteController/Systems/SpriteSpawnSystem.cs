@@ -40,11 +40,36 @@ public partial class SpriteSpawnSystem : SystemBase
             orbit.a = tempRNG.NextFloat(1f, 2f);
             orbit.b = tempRNG.NextFloat(1f, 2f);
 
-            orbit.speed = tempRNG.NextFloat(0.5f, 2f);
+            orbit.frames = tempRNG.NextInt(180, 360);
             
             ecb.RemoveComponent<RandomizeOrbitTag>(e);
         }).Schedule();
-        
+
+        Entities.ForEach((Entity e, ref OrbitData orbit, ref DynamicBuffer<OrbitBufferData> orbitBuffer, ref Translation trans) =>
+        {
+            float x = math.cos(math.radians(360f / orbit.frames * (orbit.frames - 1))) * orbit.a;
+            float y = math.sin(math.radians(360f / orbit.frames * (orbit.frames - 1))) * orbit.b;
+            trans.Value = new float3(x, 0, y);
+            for (int i = 0; i < orbit.frames; i++)
+            {
+                OrbitBufferData buffData = new();
+                quaternion newRot;
+                
+                x = math.cos(math.radians(360f / orbit.frames) * i) * orbit.a;
+                y = math.sin(math.radians(360f / orbit.frames) * i) * orbit.b;
+                float3 newPos = new float3(x, 0, y);
+                
+                newRot = quaternion.LookRotationSafe(-newPos, new float3(0, 1, 0));
+
+                trans.Value = newPos;
+                buffData.position = newPos;
+                buffData.rotation = newRot;
+                
+                orbitBuffer.Add(buffData);
+            }
+            ecb.RemoveComponent<OrbitData>(e);
+        }).Schedule();
+
         EndECB.AddJobHandleForProducer(Dependency);
     }
 }

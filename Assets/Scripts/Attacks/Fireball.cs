@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Fireball : MonoBehaviour
+{
+    public float damage;
+    public float aoe;
+    public float lifeTime;
+    public LayerMask hitables;
+
+    private void Update()
+    {
+        lifeTime -= Time.deltaTime;
+        if (lifeTime <= 0)
+        {
+            Explode();
+        }
+    }
+
+    void Explode()
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, aoe, transform.forward, Mathf.Infinity, hitables);
+
+        foreach (RaycastHit hit in hits)
+        {
+            hit.collider.GetComponent<Enemy>().TakeDamage(damage);
+        }
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Barrier"))
+        {
+            Explode();
+        }
+    }
+}
