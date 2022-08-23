@@ -21,7 +21,7 @@ public class Fireball : MonoBehaviour
 
     void Explode()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, aoe, transform.forward, Mathf.Infinity, hitables);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, aoe, transform.forward, 0, hitables);
 
         foreach (RaycastHit hit in hits)
         {
