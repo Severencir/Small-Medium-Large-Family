@@ -462,7 +462,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2496913026672819850}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 81239a3096646064db141be80b0b43dc, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2deea6c1126b99d4aa8bd1e43870a7c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireBallPrefab: {fileID: 3725869484202690651, guid: f8d217d53f8a0074eb8114cc241ad9b5,
+  fireBallPrefab: {fileID: 3725869484202690651, guid: 20e3925eae640564586f1be742a4584c,
     type: 3}
 --- !u!1 &2693484782187028058
 GameObject:
