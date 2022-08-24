@@ -12,7 +12,6 @@ public class LightningScript : MonoBehaviour
     public float speed;
     public float lifeTime;
     public float remainingTime;
-    Rigidbody RB;
     HashSet<GameObject> hits;
     public Vector3 origin;
     public Vector3 target;
@@ -20,7 +19,6 @@ public class LightningScript : MonoBehaviour
     public GameObject nearest;
     private void Start()
     {
-        RB = GetComponent<Rigidbody>();
         hits = new HashSet<GameObject>();
         remainingTime = lifeTime;
     }
@@ -50,8 +48,8 @@ public class LightningScript : MonoBehaviour
             Destroy(gameObject);
         else
         {
-            origin = target;
-            target = nearest.transform.position.normalized * range;
+            origin = transform.position;
+            target = (nearest.transform.position - transform.position).normalized * range + transform.position;
         }
 
         remainingTime = lifeTime;

@@ -6,6 +6,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     HealthSystem healthSystem;
+    List<Dot> dots = new List<Dot>();
+    Material material;
+    float stunTimer = 0;
+    public bool isStunned = false;
 
     private void Start()
     {
@@ -13,6 +17,7 @@ public class Enemy : MonoBehaviour
         {
             this.healthSystem = healthSystem;
         }
+        material = GetComponent<MeshRenderer>().material;
     }
 
     private void Update()
@@ -21,5 +26,44 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        for (int i = 0; i < dots.Count; i++)
+        {
+            Dot tDot = dots[i];
+            healthSystem.Damage(tDot.damage * Time.deltaTime);
+            tDot.time -= Time.deltaTime;
+            if (tDot.time <= 0)
+            {
+                dots.Remove(dots[i]);
+            }
+            else
+            {
+                dots[i] = tDot;
+            }
+        }
+        if (stunTimer > 0)
+            stunTimer -= Time.deltaTime;
+        else
+        {
+            material.color = Color.white;
+            isStunned = false;
+        }
     }
+
+    public void ApplyDot(float damage, float time)
+    {
+        dots.Add(new Dot { damage = damage, time = time });
+    }
+
+    public void ApplyStun(float duration)
+    {
+        material.color = Color.yellow;
+        stunTimer = duration;
+        isStunned = true;
+    }
+    struct Dot
+    {
+        public float damage;
+        public float time;
+    }
+
 }

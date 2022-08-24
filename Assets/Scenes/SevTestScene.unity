@@ -56653,7 +56653,7 @@ PrefabInstance:
     - target: {fileID: 5998309798176415137, guid: 465f693de95f26344b8b99ed33a23ada,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.7
+      value: -5.3
       objectReference: {fileID: 0}
     - target: {fileID: 5998309798176415137, guid: 465f693de95f26344b8b99ed33a23ada,
         type: 3}
@@ -56663,7 +56663,7 @@ PrefabInstance:
     - target: {fileID: 5998309798176415137, guid: 465f693de95f26344b8b99ed33a23ada,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.06
+      value: 13.6
       objectReference: {fileID: 0}
     - target: {fileID: 5998309798176415137, guid: 465f693de95f26344b8b99ed33a23ada,
         type: 3}
@@ -56715,9 +56715,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1283111438, guid: d3a19ea577147394e915c758a0b4cfac, type: 3}
-      propertyPath: lightningPrefab
+      propertyPath: stunPrefab
       value: 
-      objectReference: {fileID: 3725869484202690651, guid: d8e37c1a15a7f924b90268ab19fcf89f,
+      objectReference: {fileID: 871317154283543789, guid: 3f65013a2a33f874a8f46afb730c3457,
         type: 3}
     - target: {fileID: 1454970575103076799, guid: d3a19ea577147394e915c758a0b4cfac,
         type: 3}
