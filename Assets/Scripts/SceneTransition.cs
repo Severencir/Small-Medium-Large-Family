@@ -15,7 +15,7 @@ public class SceneTransition : MonoBehaviour
 
     public void LoadLv1()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Lv1Scene");
     }
 
     public void Help()
