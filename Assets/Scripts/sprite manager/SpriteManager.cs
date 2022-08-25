@@ -19,6 +19,13 @@ public static class SpriteManager
     public static bool IsDead { get { return isDead; } }
     public static void Damaged(int damage)
     {
+        List<SpriteStruct> list = new List<SpriteStruct>();
+        list.Add(red);
+        list.Add(blue);
+        list.Add(yellow);
+        list.Add(green);
+        list.Add(purple);
+
         if (damage > spriteSum)
         {
             isDead = true;
@@ -26,6 +33,7 @@ public static class SpriteManager
         }
         else
         {
+
             wasDamaged = true;
         }
     }
