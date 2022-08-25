@@ -2,6 +2,7 @@ using CodeMonkey.HealthSystemCM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Enemy : MonoBehaviour
     public bool isStunned = false;
     public List<GameObject> sprites;
     int damage = 1;
-
+    Unity.Mathematics.Random rng;
     private void Start()
     {
         if (HealthSystem.TryGetHealthSystem(gameObject, out HealthSystem healthSystem))
@@ -20,13 +21,14 @@ public class Enemy : MonoBehaviour
             this.healthSystem = healthSystem;
         }
         material = GetComponent<MeshRenderer>().material;
+        rng = new Unity.Mathematics.Random((uint) UnityEngine.Random.Range(1, int.MaxValue - 1));
     }
 
     private void Update()
     {
         if (healthSystem.IsDead())
         {
-            GameObject sprite = Instantiate(sprites[Random.Range(0, sprites.Count - 1)]);
+            GameObject sprite = Instantiate(sprites[rng.NextInt(0,5)]);
             sprite.transform.position = transform.position + transform.up * 1f;
             Destroy(gameObject);
         }

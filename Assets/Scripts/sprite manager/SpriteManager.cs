@@ -49,6 +49,7 @@ public static class SpriteManager
                 list.RemoveAt(index);
             }
 
+            if (spriteSum <= 0) isDead = true;
             wasDamaged = true;
         }
     }

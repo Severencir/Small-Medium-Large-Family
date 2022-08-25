@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor.UIElements;
 using UnityEngine;
 
@@ -87,6 +88,8 @@ public class Attack : MonoBehaviour
             attackTimer -= deltaTime;
         }
         else isAttacking = false;
+
+        UpdateVariables();
     }
 
     void Lightning()
@@ -159,7 +162,7 @@ public class Attack : MonoBehaviour
 
     void Stun()
     {
-        if (stunCooldownTimer <= 0)
+        if (stunCooldownTimer <= 0 )
         {
             for (int i = 0; i < stunQuantity; i++)
             {
@@ -172,5 +175,39 @@ public class Attack : MonoBehaviour
                 stunCooldownTimer = stunCooldown;
             }
         }
+    }
+
+    void UpdateVariables()
+    {
+        float redMod = Mathf.Sqrt(SpriteManager.red.active + 1);
+        float yellowMod = Mathf.Sqrt(SpriteManager.yellow.active + 1);
+        float blueMod = Mathf.Sqrt(SpriteManager.blue.active + 1);
+        float greenMod = Mathf.Sqrt(SpriteManager.green.active + 1);
+        float purpleMod = Mathf.Sqrt(SpriteManager.purple.active + 1);
+
+        fireBallDamage = 10 + redMod * 2;
+        fireBallSpeed = 15 + blueMod;
+        fireBallAoe = 2 + greenMod * 0.25f;
+        fireBallCooldown = Mathf.Pow(0.95f, SpriteManager.red.active) * 1f;
+
+        lightningRange = 3 + blueMod * 2;
+        lightningDamage = 10 + redMod;
+        lightningBounces = Mathf.RoundToInt(1 + purpleMod);
+        lightningCooldown = Mathf.Pow(0.95f, SpriteManager.blue.active) * 2f;
+
+        auraAoe = 2 + greenMod;
+        auraDamage = 10 + redMod;
+        auraDuration = 0.5f + yellowMod * 0.5f;
+        auraCooldown = Mathf.Pow(0.95f, SpriteManager.green.active) * 2f;
+
+        blockadeAoe = 1 + greenMod * 0.1f;
+        blockadeDuration = 3 + yellowMod * 0.5f;
+        blockadeQuantity = Mathf.RoundToInt(1 + purpleMod);
+        blockadeCooldown = Mathf.Pow(0.95f, SpriteManager.yellow.active) * 10f;
+
+        stunDuration = 1 + yellowMod * 0.25f;
+        stunQuantity = Mathf.RoundToInt(1 + purpleMod);
+        stunSpeed = 15 + blueMod;
+        stunCooldown = Mathf.Pow(0.95f, SpriteManager.purple.active) * 2f;
     }
 }
