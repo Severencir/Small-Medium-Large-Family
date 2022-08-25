@@ -49,6 +49,10 @@ public class Attack : MonoBehaviour
     [SerializeField]
     GameObject stunPrefab;
 
+    static bool isAttacking = false;
+    float attackTimer = 0;
+    float attackCooldown = 1f;
+    public static bool IsAttacking { get; }
     private void Start()
     {
         Physics.IgnoreLayerCollision(7, 9);
@@ -76,12 +80,20 @@ public class Attack : MonoBehaviour
             Blockade();
         if (Inp.inputs.Player.Ability3.WasPressedThisFrame())
             Stun();
+
+        if (attackTimer > 0)
+        {
+            isAttacking = true;
+            attackTimer -= deltaTime;
+        }
+        else isAttacking = false;
     }
 
     void Lightning()
     {
         if (lightningCooldownTimer <= 0)
         {
+            if (!isAttacking) attackTimer = attackCooldown;
             GameObject lightning = Instantiate(lightningPrefab, transform.position + new Vector3(0, 0.5f, 0), transform.rotation);
             LightningScript ls = lightning.GetComponent<LightningScript>();
             ls.bounces = lightningBounces;
@@ -93,6 +105,7 @@ public class Attack : MonoBehaviour
             ls.lifeTime = lightningRange / lightningSpeed;
             
             lightningCooldownTimer = lightningCooldown;
+            
         }
     }
     
@@ -100,6 +113,7 @@ public class Attack : MonoBehaviour
     {
         if (fireBallCooldownTimer <= 0)
         {
+            if (!isAttacking) attackTimer = attackCooldown;
             GameObject fireBall = Instantiate(fireBallPrefab, transform.position + new Vector3(0, 0.5f, 0), transform.rotation);
             fireBall.GetComponent<Rigidbody>().velocity = transform.forward * fireBallSpeed;
             Fireball comp = fireBall.GetComponent<Fireball>();
@@ -114,6 +128,7 @@ public class Attack : MonoBehaviour
     {
         if (auraCooldownTimer <= 0)
         {
+            if (!isAttacking) attackTimer = attackCooldown;
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, auraAoe, transform.forward, 0, hitables);
             foreach (RaycastHit hit in hits)
             {

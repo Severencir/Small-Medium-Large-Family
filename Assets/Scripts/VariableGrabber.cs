@@ -21,7 +21,7 @@ public class VariableGrabber : MonoBehaviour
     public bool IsJumping { get { return isJumping; } }
     public bool IsAttacking { get { return isAttacking; } }
     public bool IsDead { get { return isDead; } }
-    bool WasDamagedThisFrame { get { return wasDamagedThisFrame; } }
+    public bool WasDamagedThisFrame { get { return wasDamagedThisFrame; } }
 
 
     private void Start()
@@ -39,6 +39,10 @@ public class VariableGrabber : MonoBehaviour
         playerPosition = transform.position;
         playerVelocity = playerRigidBody.velocity;
         isJumping = playerJump.IsJumping;
+        isAttacking = Attack.IsAttacking;
+        isDead = SpriteManager.IsDead;
+        wasDamagedThisFrame = SpriteManager.wasDamaged;
+        SpriteManager.wasDamaged = false;
         OnUpdate();
     }
 
