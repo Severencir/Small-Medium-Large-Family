@@ -158,6 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93360860b26e0b8459a362ee183d5188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStunned: 0
+  sprites:
+  - {fileID: 7949386644258185274, guid: 3c4005c521cc95e4baaf0f3ab5850263, type: 3}
+  - {fileID: 7725515591530598270, guid: d0b5f313b886239469a9bc668e9cd63f, type: 3}
+  - {fileID: 1933502751410010143, guid: d74d90dafdba58848ab2724f0b418b38, type: 3}
+  - {fileID: 3873790731939919427, guid: ea3c51b7137461e4eb3b7f64930d0143, type: 3}
+  - {fileID: 1987866590003294310, guid: f41353235c38faf44988c23758c0fcb7, type: 3}
 --- !u!1001 &5998309798812683011
 PrefabInstance:
   m_ObjectHideFlags: 0

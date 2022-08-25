@@ -29,17 +29,17 @@ public class PlayerMovement : MonoBehaviour
         if (escaped)
             if (enabled)
             {
-                Inp.inputs.Player.Disable();
+                Inp.PlayerDisable();
                 Cursor.lockState = CursorLockMode.None;
             }
             else
             {
-                Inp.inputs.Player.Enable();
+                Inp.inputs = new Inputs();
+                Inp.inputs.Enable();
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
         Vector2 wasd = Inp.inputs.Player.Move.ReadValue<Vector2>();
-
         targetVelocity = (transform.forward * wasd.y + transform.right * wasd.x).normalized * moveSpeed;
 
         if (lastTargetVelocity != targetVelocity)

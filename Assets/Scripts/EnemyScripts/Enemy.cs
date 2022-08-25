@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     Material material;
     float stunTimer = 0;
     public bool isStunned = false;
+    public List<GameObject> sprites;
 
     private void Start()
     {
@@ -24,6 +25,8 @@ public class Enemy : MonoBehaviour
     {
         if (healthSystem.IsDead())
         {
+            GameObject sprite = Instantiate(sprites[Random.Range(0, sprites.Count - 1)]);
+            sprite.transform.position = transform.position + transform.up * 1f;
             Destroy(gameObject);
         }
         for (int i = 0; i < dots.Count; i++)

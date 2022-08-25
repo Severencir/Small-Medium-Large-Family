@@ -89,7 +89,7 @@ public class Attack : MonoBehaviour
             ls.range = lightningRange;
             ls.speed = lightningSpeed;
             ls.origin = transform.position;
-            ls.target = transform.position + transform.forward * lightningRange + new Vector3(0, 0.5f, 0);
+            ls.target = transform.position + transform.forward * lightningRange * 2 + new Vector3(0, 0.5f, 0);
             ls.lifeTime = lightningRange / lightningSpeed;
             
             lightningCooldownTimer = lightningCooldown;

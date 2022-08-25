@@ -14,4 +14,23 @@ public partial class Inp : SystemBase
     protected override void OnUpdate()
     {
     }
+    public void Enable()
+    {
+        inputs.Enable();
+    }
+
+    public void Disable()
+    {
+        inputs.Disable();
+    }
+
+    public static void PlayerEnable()
+    {
+        inputs.Player.Enable();
+    }
+
+    public static void PlayerDisable()
+    {
+        inputs.Player.Disable();
+    }
 }

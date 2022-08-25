@@ -2,7 +2,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 
 [GenerateAuthoringComponent]
-[InternalBufferCapacity(360)]
+[InternalBufferCapacity(180)]
 public struct OrbitBufferData : IBufferElementData 
 {
     public float3 position;
