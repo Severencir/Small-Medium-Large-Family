@@ -11,11 +11,13 @@ public class SceneTransition : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenuScene");
+        Time.timeScale = 1f;
     }
 
     public void LoadLv1()
     {
         SceneManager.LoadScene("Lv1Scene");
+        Time.timeScale = 1f;
     }
 
     public void Help()
@@ -25,7 +27,7 @@ public class SceneTransition : MonoBehaviour
 
     public void CloseHelp()
     {
-        helpPanel.SetActive(false);
+        helpPanel.SetActive(false);        
     }
 
     public void QuitGame()
