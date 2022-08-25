@@ -6,18 +6,18 @@ using UnityEngine;
 
 public static class SpriteManager
 {
-    public static SpriteStruct red; //fireball
-    public static SpriteStruct blue; //lightning
-    public static SpriteStruct yellow; //barrier
-    public static SpriteStruct green; //aoedot
-    public static SpriteStruct purple; //stun
+    public static SpriteStruct red = new(0,1); //fireball
+    public static SpriteStruct blue = new(1, 1); //lightning
+    public static SpriteStruct yellow = new(2, 1); //barrier
+    public static SpriteStruct green = new(3, 1); //aoedot
+    public static SpriteStruct purple = new(4, 1); //stun
 
     public static int spriteSum { get { return (red.active + blue.active + yellow.active + green.active + purple.active); } }
 
     static bool isDead;
     public static bool wasDamaged;
     public static bool IsDead { get { return isDead; } }
-    public static void Damaged(int damage)
+    public static void Damage(int damage)
     {
         List<SpriteStruct> list = new List<SpriteStruct>();
         list.Add(red);
@@ -33,13 +33,37 @@ public static class SpriteManager
         }
         else
         {
+            for(int i = 0; i < 5; i++)
+            {
+                int index = Random.Range(0,list.Count-1);
+                int subtract = Mathf.Min(list[index].active, damage);
+
+                damage -= subtract;
+
+                RemoveIndex(list[index].index, subtract);
+
+                if (damage <= 0)
+                {
+                    break;
+                }
+                list.RemoveAt(index);
+            }
 
             wasDamaged = true;
         }
     }
+    static void RemoveIndex(int index, int quantity)
+    {
+        if (index == 0) red.Remove(quantity);
+        if (index == 1) blue.Remove(quantity);
+        if (index == 2) yellow.Remove(quantity);
+        if (index == 3) green.Remove(quantity);
+        if (index == 4) purple.Remove(quantity);
+    }
 }
 public struct SpriteStruct
 {
+    public int index;
     public int active;
     int toAdd;
     int toRemove;
@@ -71,5 +95,13 @@ public struct SpriteStruct
         int temp = toRemove;
         toRemove = 0;
         return temp;
+    }
+
+    public SpriteStruct(int _index,int starting)
+    {
+        index = _index;
+        toAdd = starting;
+        toRemove = 0;
+        active = starting;
     }
 }

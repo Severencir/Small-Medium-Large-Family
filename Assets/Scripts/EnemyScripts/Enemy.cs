@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     float stunTimer = 0;
     public bool isStunned = false;
     public List<GameObject> sprites;
+    int damage = 1;
 
     private void Start()
     {
@@ -69,4 +70,12 @@ public class Enemy : MonoBehaviour
         public float time;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            print("collision");
+            SpriteManager.Damage(damage);
+        }
+    }
 }
