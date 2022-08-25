@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor;
 using UnityEngine;
 
 public static class SpriteManager
@@ -10,6 +11,22 @@ public static class SpriteManager
     public static SpriteStruct yellow; //barrier
     public static SpriteStruct green; //aoedot
     public static SpriteStruct purple; //stun
+
+    public static int spriteSum { get { return (red.active + blue.active + yellow.active + green.active + purple.active); } }
+
+    public static bool isDead;
+    public static void Damaged(int damage)
+    {
+        if (damage > spriteSum)
+        {
+            isDead = true;
+            return;
+        }
+        else
+        {
+
+        }
+    }
 }
 public struct SpriteStruct
 {
