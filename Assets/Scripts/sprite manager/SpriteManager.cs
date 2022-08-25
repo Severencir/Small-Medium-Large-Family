@@ -14,7 +14,9 @@ public static class SpriteManager
 
     public static int spriteSum { get { return (red.active + blue.active + yellow.active + green.active + purple.active); } }
 
-    public static bool isDead;
+    static bool isDead;
+    public static bool wasDamaged;
+    public static bool IsDead { get { return isDead; } }
     public static void Damaged(int damage)
     {
         if (damage > spriteSum)
@@ -24,7 +26,7 @@ public static class SpriteManager
         }
         else
         {
-
+            wasDamaged = true;
         }
     }
 }
