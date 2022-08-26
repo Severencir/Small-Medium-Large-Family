@@ -10,7 +10,7 @@ public class Attack : MonoBehaviour
     float fireBallDamage = 10f;
     float fireBallSpeed = 20f;
     float fireBallAoe = 1f;
-    float fireBallLifeTime = 2f;
+    float fireBallLifeTime = 1f;
     float fireBallCooldown = 0.5f;
     float fireBallCooldownTimer = 0;
 
@@ -53,12 +53,12 @@ public class Attack : MonoBehaviour
     static bool isAttacking = false;
     float attackTimer = 0;
     float attackCooldown = 1f;
+
+    public static float startTime;
     public static bool IsAttacking { get; }
     private void Start()
     {
-        Physics.IgnoreLayerCollision(7, 9);
-        Physics.IgnoreLayerCollision(7, 11); 
-        Physics.IgnoreLayerCollision(9, 11);
+        startTime = Time.time;
     }
     void Update()
     {
@@ -105,8 +105,8 @@ public class Attack : MonoBehaviour
             ls.damage = lightningDamage;
             ls.range = lightningRange;
             ls.speed = lightningSpeed;
-            ls.origin = transform.position;
-            ls.target = transform.position + transform.forward * lightningRange * 2 + new Vector3(0, 0.5f, 0);
+            ls.origin = transform.position + transform.forward;
+            ls.target = transform.position + transform.forward * lightningRange * 2 + transform.up * 0.5f;
             ls.lifeTime = lightningRange / lightningSpeed;
 
             AudioManager.Play("Lightning");

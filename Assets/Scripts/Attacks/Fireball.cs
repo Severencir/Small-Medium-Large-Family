@@ -25,7 +25,7 @@ public class Fireball : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            hit.collider.GetComponent<HealthSystemComponent>().GetHealthSystem().Damage(damage);
+            hit.collider.GetComponent<Enemy>().Damage(damage);
         }
         Destroy(gameObject);
     }

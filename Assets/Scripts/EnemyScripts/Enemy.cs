@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,8 +13,11 @@ public class Enemy : MonoBehaviour
     float stunTimer = 0;
     public bool isStunned = false;
     public List<GameObject> sprites;
-    int damage = 1;
+    float damageCoef = 1;
     Unity.Mathematics.Random rng;
+    public GameObject sparks;
+    float damageResistanceCoef = 1;
+    
     private void Start()
     {
         if (HealthSystem.TryGetHealthSystem(gameObject, out HealthSystem healthSystem))
@@ -26,6 +30,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        float deltaTime = Time.deltaTime;
         if (healthSystem.IsDead())
         {
             GameObject sprite = Instantiate(sprites[rng.NextInt(0,5)]);
@@ -35,8 +40,8 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < dots.Count; i++)
         {
             Dot tDot = dots[i];
-            healthSystem.Damage(tDot.damage * Time.deltaTime);
-            tDot.time -= Time.deltaTime;
+            Damage(tDot.damage * deltaTime);
+            tDot.time -= deltaTime;
             if (tDot.time <= 0)
             {
                 dots.Remove(dots[i]);
@@ -47,12 +52,17 @@ public class Enemy : MonoBehaviour
             }
         }
         if (stunTimer > 0)
-            stunTimer -= Time.deltaTime;
+            stunTimer -= deltaTime;
         else
         {
             material.color = Color.white;
             isStunned = false;
         }
+        if (dots.Count > 0)
+            sparks.SetActive(true);
+        else
+            sparks.SetActive(false);
+
     }
 
     public void ApplyDot(float damage, float time)
@@ -77,7 +87,13 @@ public class Enemy : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             print("collision");
-            SpriteManager.Damage(damage);
+            SpriteManager.Damage(GetDamage);
         }
+    }
+    int GetDamage { get { return (int)(damageCoef * (1 + (Time.time - Attack.startTime) * 0.02f)); } }
+
+    public void Damage(float damage)
+    {
+        healthSystem.Damage(damage / (1 + (Time.time - Attack.startTime) * 0.02f) * damageResistanceCoef);
     }
 }

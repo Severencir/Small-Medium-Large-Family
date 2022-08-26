@@ -6,11 +6,11 @@ using UnityEngine;
 
 public static class SpriteManager
 {
-    public static SpriteStruct red = new(0,10); //fireball
-    public static SpriteStruct blue = new(1, 10); //lightning
-    public static SpriteStruct yellow = new(2, 10); //barrier
-    public static SpriteStruct green = new(3, 10); //aoedot
-    public static SpriteStruct purple = new(4, 10); //stun
+    public static SpriteStruct red = new(0, 2); //fireball
+    public static SpriteStruct blue = new(1, 2); //lightning
+    public static SpriteStruct yellow = new(2, 2); //barrier
+    public static SpriteStruct green = new(3, 2); //aoedot
+    public static SpriteStruct purple = new(4, 2); //stun
 
     public static int spriteSum { get { return (red.active + blue.active + yellow.active + green.active + purple.active); } }
 
