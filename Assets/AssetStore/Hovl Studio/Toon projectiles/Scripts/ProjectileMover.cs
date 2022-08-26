@@ -31,7 +31,6 @@ public class ProjectileMover : MonoBehaviour
                 Destroy(flashInstance, flashPsParts.main.duration);
             }
         }
-        Destroy(gameObject,5);
 	}
 
     void FixedUpdate ()
@@ -62,15 +61,7 @@ public class ProjectileMover : MonoBehaviour
             else { hitInstance.transform.LookAt(contact.point + contact.normal); }
 
             var hitPs = hitInstance.GetComponent<ParticleSystem>();
-            if (hitPs != null)
-            {
-                Destroy(hitInstance, hitPs.main.duration);
-            }
-            else
-            {
-                var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
-                Destroy(hitInstance, hitPsParts.main.duration);
-            }
+            
         }
         foreach (var detachedPrefab in Detached)
         {

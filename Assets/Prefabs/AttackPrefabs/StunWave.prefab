@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 871317154283543786}
   - component: {fileID: 8146972828490880922}
   - component: {fileID: -4643266187530337238}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StunWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}

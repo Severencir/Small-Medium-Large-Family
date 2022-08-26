@@ -57,6 +57,8 @@ public class Attack : MonoBehaviour
     private void Start()
     {
         Physics.IgnoreLayerCollision(7, 9);
+        Physics.IgnoreLayerCollision(7, 11); 
+        Physics.IgnoreLayerCollision(9, 11);
     }
     void Update()
     {
@@ -71,15 +73,15 @@ public class Attack : MonoBehaviour
             blockadeCooldownTimer -= deltaTime;
         if (stunCooldownTimer > 0)
             stunCooldownTimer -= deltaTime;
-        if (Inp.inputs.Player.Fire.WasPressedThisFrame())
+        if (Inp.inputs.Player.Fire.IsPressed())
             FireBall();
-        if (Inp.inputs.Player.Fire2.WasPressedThisFrame())
+        if (Inp.inputs.Player.Fire2.IsPressed())
             Lightning();
-        if (Inp.inputs.Player.Ability1.WasPressedThisFrame())
+        if (Inp.inputs.Player.Ability1.IsPressed())
             Aura();
-        if (Inp.inputs.Player.Ability2.WasPressedThisFrame())
+        if (Inp.inputs.Player.Ability2.IsPressed())
             Blockade();
-        if (Inp.inputs.Player.Ability3.WasPressedThisFrame())
+        if (Inp.inputs.Player.Ability3.IsPressed())
             Stun();
 
         if (attackTimer > 0)
@@ -106,7 +108,8 @@ public class Attack : MonoBehaviour
             ls.origin = transform.position;
             ls.target = transform.position + transform.forward * lightningRange * 2 + new Vector3(0, 0.5f, 0);
             ls.lifeTime = lightningRange / lightningSpeed;
-            
+
+            AudioManager.Play("Lightning");
             lightningCooldownTimer = lightningCooldown;
             
         }
@@ -123,6 +126,8 @@ public class Attack : MonoBehaviour
             comp.damage = fireBallDamage;
             comp.aoe = fireBallAoe;
             comp.lifeTime = fireBallLifeTime;
+            AudioManager.Play("Fireball");
+
             fireBallCooldownTimer = fireBallCooldown;
         }
     }
@@ -138,7 +143,7 @@ public class Attack : MonoBehaviour
                 hit.collider.GetComponent<Enemy>().ApplyDot(auraDamage, auraDuration);
             }
 
-
+            AudioManager.Play("Aura");
             auraCooldownTimer = auraCooldown;
         }
     }
@@ -156,6 +161,7 @@ public class Attack : MonoBehaviour
 
                 Destroy(blockade, blockadeDuration);
             }
+            AudioManager.Play("Blockade");
             blockadeCooldownTimer = blockadeCooldown;
         }
     }
@@ -172,8 +178,10 @@ public class Attack : MonoBehaviour
                     transform.up * UnityEngine.Random.Range(-offset, offset)).normalized * stunSpeed;
                 stun.GetComponent<StunScript>().duration = stunDuration;
                 Destroy(stun, stunLifetime);
-                stunCooldownTimer = stunCooldown;
             }
+            AudioManager.Play("Stun");
+
+            stunCooldownTimer = stunCooldown;
         }
     }
 
@@ -187,27 +195,27 @@ public class Attack : MonoBehaviour
 
         fireBallDamage = 10 + redMod * 2;
         fireBallSpeed = 15 + blueMod;
-        fireBallAoe = 2 + greenMod * 0.25f;
-        fireBallCooldown = Mathf.Pow(0.95f, SpriteManager.red.active) * 1f;
+        fireBallAoe = 1 + greenMod * 0.25f;
+        fireBallCooldown = Mathf.Pow(0.98f, SpriteManager.red.active) * 1f;
 
         lightningRange = 3 + blueMod * 2;
         lightningDamage = 10 + redMod;
         lightningBounces = Mathf.RoundToInt(1 + purpleMod);
-        lightningCooldown = Mathf.Pow(0.95f, SpriteManager.blue.active) * 2f;
+        lightningCooldown = Mathf.Pow(0.98f, SpriteManager.blue.active) * 2f;
 
         auraAoe = 2 + greenMod;
         auraDamage = 10 + redMod;
         auraDuration = 0.5f + yellowMod * 0.5f;
-        auraCooldown = Mathf.Pow(0.95f, SpriteManager.green.active) * 2f;
+        auraCooldown = Mathf.Pow(0.98f, SpriteManager.green.active) * 2f;
 
         blockadeAoe = 1 + greenMod * 0.1f;
         blockadeDuration = 3 + yellowMod * 0.5f;
         blockadeQuantity = Mathf.RoundToInt(1 + purpleMod);
-        blockadeCooldown = Mathf.Pow(0.95f, SpriteManager.yellow.active) * 10f;
+        blockadeCooldown = Mathf.Pow(0.98f, SpriteManager.yellow.active) * 10f;
 
         stunDuration = 1 + yellowMod * 0.25f;
         stunQuantity = Mathf.RoundToInt(1 + purpleMod);
         stunSpeed = 15 + blueMod;
-        stunCooldown = Mathf.Pow(0.95f, SpriteManager.purple.active) * 2f;
+        stunCooldown = Mathf.Pow(0.98f, SpriteManager.purple.active) * 2f;
     }
 }

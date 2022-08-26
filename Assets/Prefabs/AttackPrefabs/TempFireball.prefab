@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3031046182156168680}
   - component: {fileID: 3945360094803642236}
   - component: {fileID: -8145408503204124685}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TempFireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

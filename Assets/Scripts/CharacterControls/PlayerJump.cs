@@ -26,6 +26,7 @@ public class PlayerJump : MonoBehaviour
         float deltaTime = Time.deltaTime;
         if (Mathf.Abs(rb.velocity.y) < 0.000001f)
         {
+            if (isJumping) AudioManager.Play("LandingSound");
             canJump = true;
             isJumping = false;
         }
@@ -37,6 +38,7 @@ public class PlayerJump : MonoBehaviour
         bool jumpPress = Inp.inputs.Player.Jump.IsPressed();
         if (jumpPress && canJump)
         {
+            AudioManager.Play("JumpingSound");
             rb.velocity = new(rb.velocity.x, jumpSpeed, rb.velocity.z);
             isJumping = true;
         }
