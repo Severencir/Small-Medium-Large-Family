@@ -41,7 +41,7 @@ public class LightningScript : MonoBehaviour
     }
     void Jump(Collider other)
     {
-        other.gameObject.GetComponent<HealthSystemComponent>().GetHealthSystem().Damage(damage);
+        other.gameObject.GetComponent<Enemy>().Damage(damage);
         hits.Add(other.gameObject);
         nearest = FindClosestEnemy();
         if (bounces <= 0 || nearest == null)

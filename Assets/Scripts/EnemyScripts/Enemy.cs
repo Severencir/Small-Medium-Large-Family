@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < dots.Count; i++)
         {
             Dot tDot = dots[i];
-            healthSystem.Damage(tDot.damage * deltaTime);
+            Damage(tDot.damage * deltaTime);
             tDot.time -= deltaTime;
             if (tDot.time <= 0)
             {
@@ -90,10 +90,10 @@ public class Enemy : MonoBehaviour
             SpriteManager.Damage(GetDamage);
         }
     }
-    int GetDamage { get { return (int)(damageCoef * (1 + Time.time - Attack.startTime) * 0.1f); } }
+    int GetDamage { get { return (int)(damageCoef * (1 + (Time.time - Attack.startTime) * 0.02f)); } }
 
     public void Damage(float damage)
     {
-        healthSystem.Damage(damage / (1 + (Time.time - Attack.startTime) * 0.1f) * damageResistanceCoef);
+        healthSystem.Damage(damage / (1 + (Time.time - Attack.startTime) * 0.02f) * damageResistanceCoef);
     }
 }
