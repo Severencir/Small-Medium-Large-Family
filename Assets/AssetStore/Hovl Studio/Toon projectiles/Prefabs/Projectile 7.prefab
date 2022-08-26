@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 135219337407746228}
   - component: {fileID: 108919900232066054}
   - component: {fileID: 8295155288668210757}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Projectile 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254724754748870}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.327, y: 1.139, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -47,7 +47,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254724754748870}
   serializedVersion: 8
-  lengthInSec: 3
+  lengthInSec: 20
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
@@ -122,7 +122,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 20
       minScalar: 0.3
       maxCurve:
         serializedVersion: 2
@@ -5030,7 +5030,7 @@ GameObject:
   - component: {fileID: 4000204042258922}
   - component: {fileID: 198347292852406180}
   - component: {fileID: 199381448505880882}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5060,7 +5060,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800544799133088}
   serializedVersion: 8
-  lengthInSec: 3
+  lengthInSec: 20
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -9864,7 +9864,7 @@ GameObject:
   - component: {fileID: 198904408555212570}
   - component: {fileID: 199042042599827284}
   - component: {fileID: 114241278424780564}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9895,7 +9895,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853683965846254}
   serializedVersion: 8
-  lengthInSec: 3
+  lengthInSec: 20
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3

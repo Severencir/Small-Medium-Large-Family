@@ -105,8 +105,8 @@ public partial class SpriteSpawnSystem : SystemBase
         Entities.WithAll<RandomizeOrbitTag>().ForEach((Entity e, ref OrbitData orbit) =>
         {
             Random tempRNG = new Random((uint)e.Index);
-            orbit.a = tempRNG.NextFloat(1f, 2f);
-            orbit.b = tempRNG.NextFloat(1f, 2f);
+            orbit.a = tempRNG.NextFloat(0.8f, 1.5f);
+            orbit.b = tempRNG.NextFloat(0.8f, 1.5f);
 
             orbit.frames = tempRNG.NextInt(180, 360);
             
