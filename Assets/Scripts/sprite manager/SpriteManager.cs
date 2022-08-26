@@ -13,6 +13,7 @@ public static class SpriteManager
     public static SpriteStruct purple = new(4, 2); //stun
 
     public static int spriteSum { get { return (red.active + blue.active + yellow.active + green.active + purple.active); } }
+    public static int spriteMin { get { return Mathf.Min(red.active, blue.active, yellow.active, green.active, purple.active); } }
 
     static bool isDead;
     public static bool wasDamaged;

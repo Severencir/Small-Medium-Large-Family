@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class SwapSprites : MonoBehaviour
 {
+    public GameObject menu;
+    public PauseMenu pauseMenu;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            bool success = SpriteManager.red.Remove(5);
-            if (success)
-            {
-                SpriteManager.blue.Add(5);
-            }
+            pauseMenu.Pause();
+            menu.SetActive(true);
         }
     }
 }
