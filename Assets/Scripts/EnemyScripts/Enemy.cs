@@ -90,10 +90,10 @@ public class Enemy : MonoBehaviour
             SpriteManager.Damage(GetDamage);
         }
     }
-    int GetDamage { get { return (int)(damageCoef * (1 + (Time.time - Attack.startTime) * 0.02f)); } }
+    int GetDamage { get { return (int)(damageCoef * (1 + (Time.time - Attack.startTime) * 0.01f)); } }
 
     public void Damage(float damage)
     {
-        healthSystem.Damage(damage / (1 + (Time.time - Attack.startTime) * 0.02f) * damageResistanceCoef);
+        healthSystem.Damage(damage / (1 + (Time.time - Attack.startTime) * 0.01f) * damageResistanceCoef);
     }
 }
