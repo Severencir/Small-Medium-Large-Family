@@ -6,6 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject tradeMenuUI;
+
 
     private void Update()
     {
@@ -41,5 +43,16 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
         Inp.PlayerDisable();
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void CancelTrade()
+    {
+        tradeMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+        Inp.inputs = new Inputs();
+        Inp.inputs.Enable();
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 }
