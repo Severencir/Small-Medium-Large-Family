@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
