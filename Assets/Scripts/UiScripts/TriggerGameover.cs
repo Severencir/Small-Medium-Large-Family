@@ -20,9 +20,14 @@ public class TriggerGameover : MonoBehaviour
     {
         if (SpriteManager.IsDead)
         {
-            pauseMenu.Pause();
-            gameOver.SetActive(true);
+            StartCoroutine(DeathTimer());
         }
+    }
+    IEnumerator DeathTimer()
+    {
+        yield return new WaitForSeconds(5f);
+        pauseMenu.Pause();
+        gameOver.SetActive(true);
     }
     
 }
