@@ -7,20 +7,26 @@ public class TriggerGameover : MonoBehaviour
     public GameObject gameOver;
     public PauseMenu pauseMenu;
     int startingSprites = 2;
+    bool didDamage = false;
     private void Start()
     {
         pauseMenu.Resume();
-        SpriteManager.red.Add(2);
-        SpriteManager.blue.Add(2);
-        SpriteManager.green.Add(2);
-        SpriteManager.purple.Add(2);
-        SpriteManager.yellow.Add(2);
+        SpriteManager.red.Add(startingSprites);
+        SpriteManager.blue.Add(startingSprites);
+        SpriteManager.green.Add(startingSprites);
+        SpriteManager.purple.Add(startingSprites);
+        SpriteManager.yellow.Add(startingSprites);
     }
     void Update()
     {
         if (SpriteManager.IsDead)
         {
-            StartCoroutine(DeathTimer());
+            if (!didDamage)
+            {
+                SpriteManager.Damage(SpriteManager.spriteSum);
+                didDamage = true;
+                StartCoroutine(DeathTimer());
+            }
         }
     }
     IEnumerator DeathTimer()
