@@ -6,7 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-    public GameObject swapUI;
+    public TradeScript tradeScript;
 
     private void Update()
     {
@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
         {
             if (GameIsPaused)
             {
+                tradeScript.Reset();
                 AudioManager.Play("UnPauseSound");
                 Resume();
             }
@@ -29,7 +30,6 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        swapUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
         Inp.inputs = new Inputs();
@@ -43,5 +43,11 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
         Inp.PlayerDisable();
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void CancelTrade()
+    {
+        tradeScript.Reset();
+        Resume();
     }
 }

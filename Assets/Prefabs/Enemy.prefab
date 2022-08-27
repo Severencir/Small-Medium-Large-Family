@@ -5012,6 +5012,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5998309798176415137}
     m_Modifications:
+    - target: {fileID: 2788500057354785295, guid: e7466e6fb66af3a439a44338442460fa,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2788500057354785295, guid: e7466e6fb66af3a439a44338442460fa,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2834494183111001735, guid: e7466e6fb66af3a439a44338442460fa,
         type: 3}
       propertyPath: m_RootOrder

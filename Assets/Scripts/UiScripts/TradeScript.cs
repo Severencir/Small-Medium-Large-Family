@@ -59,4 +59,10 @@ public class TradeScript: MonoBehaviour
         menu.SetActive(false);
         pauseMenu.Resume();
     }
+    public void Reset()
+    {
+        tradeFrom = -1;
+        tradeTo = -1;
+        menu.SetActive(false);
+    }
 }
