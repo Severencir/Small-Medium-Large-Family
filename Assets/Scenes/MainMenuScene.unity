@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 469412221}
   - component: {fileID: 469412220}
   m_Layer: 5
-  m_Name: Text (You are not alone)
+  m_Name: Text (Ghost Mage Kiki)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -753,7 +753,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Thou art not \nby thineself"
+  m_Text: Ghost Mage Kiki
 --- !u!222 &469412221
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1730,7 +1730,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 236.1486, y: 248.9417}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1907501986
 MonoBehaviour:
@@ -1762,10 +1762,13 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Git Good
+  m_Text: "\tHellow stramger, today you will help Kiki on her adventure. Kiki has
+    been tasked with releasing tainted souls by using her spiritual magic. Gratefull
+    souls will acompany you and empower you throughout your adventure. Try to survive
+    as long as you can and save as many souls as possible. Good luck!\n-Crow"
 --- !u!222 &1907501987
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1786,7 +1789,7 @@ GameObject:
   - component: {fileID: 2065077395}
   - component: {fileID: 2065077394}
   m_Layer: 5
-  m_Name: Panel(testPanel)
+  m_Name: Panel(Help)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1805,7 +1808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.39613724, g: 0, b: 1, a: 1}
+  m_Color: {r: 0.20922975, g: 0.01375042, b: 0.9716981, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1850,5 +1853,5 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 25.820984, y: -11.741791}
-  m_SizeDelta: {x: -114.1489, y: -182.8028}
+  m_SizeDelta: {x: -206.5965, y: -182.8028}
   m_Pivot: {x: 0.5, y: 0.5}
