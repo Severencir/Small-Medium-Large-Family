@@ -42,10 +42,6 @@ public class CameraController : MonoBehaviour
 
         RaycastHit hit;
         Ray ray = new(transform.position, -transform.forward);
-
-        bool hasHit = Physics.Raycast(ray, out hit, cameraDist);
-
-        if (!SpriteManager.IsDead)
-            cam.transform.position = -transform.forward * (hasHit ? (int)(hit.distance - 0.3f) : cameraDist) + transform.position;
+        
     }
 }
