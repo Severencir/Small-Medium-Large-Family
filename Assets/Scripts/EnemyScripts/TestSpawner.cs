@@ -6,7 +6,7 @@ public class TestSpawner : MonoBehaviour
 {
     public GameObject Spawnee;
     float timer = 0;
-    float cooldown = 30;
+    float cooldown = 10;
     // Update is called once per frame
     void Update()
     {

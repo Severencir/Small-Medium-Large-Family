@@ -13,10 +13,14 @@ public class PauseMenu : MonoBehaviour
         {
             if (GameIsPaused)
             {
+                AudioManager.Play("UnPauseSound");
+                pauseMenuUI.SetActive(false);
                 Resume();
             }
             else
             {
+                AudioManager.Play("PauseSound");
+                pauseMenuUI.SetActive(true);
                 Pause();
             }
         }
@@ -24,8 +28,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        AudioManager.Play("UnPauseSound");
-        pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
         Inp.inputs = new Inputs();
@@ -35,8 +37,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        AudioManager.Play("PauseSound");
-        pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
         Inp.PlayerDisable();
