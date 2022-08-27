@@ -36,7 +36,9 @@ public class PlayerJump : MonoBehaviour
         }
 
         bool jumpPress = Inp.inputs.Player.Jump.IsPressed();
-        if (jumpPress && canJump)
+
+        if (!SpriteManager.IsDead)
+            if (jumpPress && canJump)
         {
             AudioManager.Play("JumpingSound");
             rb.velocity = new(rb.velocity.x, jumpSpeed, rb.velocity.z);

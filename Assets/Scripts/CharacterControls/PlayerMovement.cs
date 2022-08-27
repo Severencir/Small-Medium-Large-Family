@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        SpriteManager.IsDead = false;
         rb = GetComponent<Rigidbody>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -24,20 +25,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        bool escaped = Inp.inputs.MouseCapture.Escape.WasPressedThisFrame();
-        bool enabled = Inp.inputs.Player.enabled;
-        if (escaped)
-            if (enabled)
-            {
-                Inp.PlayerDisable();
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Inp.inputs = new Inputs();
-                Inp.inputs.Enable();
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+        if (transform.position.y < -5)
+        {
+            SpriteManager.IsDead = true;
+        }
 
         Vector2 wasd = Inp.inputs.Player.Move.ReadValue<Vector2>();
         targetVelocity = (transform.forward * wasd.y + transform.right * wasd.x).normalized * moveSpeed;
@@ -55,7 +46,10 @@ public class PlayerMovement : MonoBehaviour
 
         velocity = Vector3.Lerp(startVelocity, targetVelocity, timer / smoothing);
 
-        rb.velocity = new(velocity.x, rb.velocity.y, velocity.z);
+        if (!SpriteManager.IsDead)
+            rb.velocity = new(velocity.x, rb.velocity.y, velocity.z);
+        else
+            rb.velocity = new(0,rb.velocity.y, 0);
         lastTargetVelocity = targetVelocity;
     }
 }

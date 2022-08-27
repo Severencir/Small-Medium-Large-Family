@@ -37,13 +37,15 @@ public class CameraController : MonoBehaviour
             xRotate = -89f;
         if (xRotate > 89f)
             xRotate = 89f;
-        transform.eulerAngles = new Vector3(xRotate, player.transform.eulerAngles.y, transform.eulerAngles.z);
+        if (!SpriteManager.IsDead)
+            transform.eulerAngles = new Vector3(xRotate, player.transform.eulerAngles.y, transform.eulerAngles.z);
 
         RaycastHit hit;
         Ray ray = new(transform.position, -transform.forward);
 
         bool hasHit = Physics.Raycast(ray, out hit, cameraDist);
 
-        cam.transform.position = -transform.forward * (hasHit ? hit.distance - 0.3f : cameraDist) + transform.position;
+        if (!SpriteManager.IsDead)
+            cam.transform.position = -transform.forward * (hasHit ? (int)(hit.distance - 0.3f) : cameraDist) + transform.position;
     }
 }

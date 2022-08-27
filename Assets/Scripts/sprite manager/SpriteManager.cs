@@ -6,18 +6,19 @@ using UnityEngine;
 
 public static class SpriteManager
 {
-    public static SpriteStruct red = new(0, 2); //fireball
-    public static SpriteStruct blue = new(1, 2); //lightning
-    public static SpriteStruct yellow = new(2, 2); //barrier
-    public static SpriteStruct green = new(3, 2); //aoedot
-    public static SpriteStruct purple = new(4, 2); //stun
+    public static SpriteStruct red = new(0, 0); //fireball
+    public static SpriteStruct blue = new(1, 0); //lightning
+    public static SpriteStruct yellow = new(2, 0); //barrier
+    public static SpriteStruct green = new(3, 0); //aoedot
+    public static SpriteStruct purple = new(4, 0); //stun
 
     public static int spriteSum { get { return (red.active + blue.active + yellow.active + green.active + purple.active); } }
     public static int spriteMin { get { return Mathf.Min(red.active, blue.active, yellow.active, green.active, purple.active); } }
 
     static bool isDead;
+    public static bool diedThisFrame = false;
     public static bool wasDamaged;
-    public static bool IsDead { get { return isDead; } }
+    public static bool IsDead { get { return isDead; } set { isDead = diedThisFrame = value; } }
     public static void Damage(int damage)
     {
         List<SpriteStruct> list = new List<SpriteStruct>();
@@ -26,10 +27,11 @@ public static class SpriteManager
         list.Add(yellow);
         list.Add(green);
         list.Add(purple);
+        AudioManager.Play("DamagedSound");
 
         if (damage > spriteSum)
         {
-            isDead = true;
+            IsDead = true;
             return;
         }
         else
@@ -50,7 +52,7 @@ public static class SpriteManager
                 list.RemoveAt(index);
             }
 
-            if (spriteSum <= 0) isDead = true;
+            if (spriteSum <= 0) IsDead = true;
             wasDamaged = true;
         }
     }

@@ -53,16 +53,27 @@ public class Attack : MonoBehaviour
     static bool isAttacking = false;
     float attackTimer = 0;
     float attackCooldown = 1f;
-
+    public static float graceCountdown = 0;
+    public static float grace = 10;
     public static float startTime;
-    public static bool IsAttacking { get; }
+    bool timeset = false;
+    public static bool IsAttacking { get { return isAttacking; } }
     private void Start()
     {
         startTime = Time.time;
     }
     void Update()
     {
+
         float deltaTime = Time.deltaTime;
+        if (graceCountdown > 0)
+            graceCountdown -= deltaTime;
+        else if (!timeset)
+        {
+            startTime = Time.time;
+            timeset = true;
+        }
+
         if (fireBallCooldownTimer > 0)
             fireBallCooldownTimer -= deltaTime;
         if (lightningCooldownTimer > 0)

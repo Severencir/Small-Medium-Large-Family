@@ -14,7 +14,6 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused)
             {
                 AudioManager.Play("UnPauseSound");
-                pauseMenuUI.SetActive(false);
                 Resume();
             }
             else
@@ -28,6 +27,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
         Inp.inputs = new Inputs();

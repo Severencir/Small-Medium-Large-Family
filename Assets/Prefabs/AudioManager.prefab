@@ -82,9 +82,9 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: MainSong
-    clip: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
+    clip: {fileID: 8300000, guid: 11963070041a34e98ae9b68c66c69b64, type: 3}
     volume: 1
-    pitch: 1
+    pitch: 1.5
     loop: 1
     source: {fileID: 0}
   - name: Fireball
@@ -113,6 +113,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Stun
     clip: {fileID: 8300000, guid: acbcb75601b0082458fda8807f67c813, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DamagedSound
+    clip: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
     volume: 1
     pitch: 1
     loop: 0
