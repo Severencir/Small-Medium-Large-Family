@@ -20,7 +20,7 @@ public class TestSpawner : MonoBehaviour
             }
             else
                 timer -= Time.deltaTime;
-            cooldown = 20 * (Mathf.Pow(0.99f, 1 + (Time.time - Attack.startTime)));
+            cooldown = 20 * (Mathf.Pow(0.99f, 1 + (Time.time - Attack.startTime) * 0.05f));
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting.FullSerializer;
 using UnityEditor;
 using UnityEngine;
@@ -18,42 +19,47 @@ public static class SpriteManager
     static bool isDead;
     public static bool diedThisFrame = false;
     public static bool wasDamaged;
+    static float timer = 0;
     public static bool IsDead { get { return isDead; } set { isDead = diedThisFrame = value; } }
-    public static void Damage(int damage)
+    public static void Damage(int damage, bool overrule = false)
     {
-        List<SpriteStruct> list = new List<SpriteStruct>();
-        list.Add(red);
-        list.Add(blue);
-        list.Add(yellow);
-        list.Add(green);
-        list.Add(purple);
-        AudioManager.Play("DamagedSound");
+        if (overrule || Time.time - timer > 0.5f)
+        {
+            List<SpriteStruct> list = new List<SpriteStruct>();
+            list.Add(red);
+            list.Add(blue);
+            list.Add(yellow);
+            list.Add(green);
+            list.Add(purple);
+            AudioManager.Play("DamagedSound");
 
-        if (damage > spriteSum)
-        {
-            IsDead = true;
-            return;
-        }
-        else
-        {
-            for(int i = 0; i < 5; i++)
+            if (damage > spriteSum)
             {
-                int index = Random.Range(0,list.Count-1);
-                int subtract = Mathf.Min(list[index].active, damage);
-
-                damage -= subtract;
-
-                RemoveIndex(list[index].index, subtract);
-
-                if (damage <= 0)
-                {
-                    break;
-                }
-                list.RemoveAt(index);
+                IsDead = true;
+                return;
             }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    int index = Random.Range(0, list.Count - 1);
+                    int subtract = Mathf.Min(list[index].active, damage);
 
-            if (spriteSum <= 0) IsDead = true;
-            wasDamaged = true;
+                    damage -= subtract;
+
+                    RemoveIndex(list[index].index, subtract);
+
+                    if (damage <= 0)
+                    {
+                        break;
+                    }
+                    list.RemoveAt(index);
+                }
+
+                if (spriteSum <= 0) IsDead = true;
+                wasDamaged = true;
+            }
+            timer = Time.time;
         }
     }
     static void RemoveIndex(int index, int quantity)
