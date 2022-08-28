@@ -5502,7 +5502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1586883549}
-  tradeMenuUI: {fileID: 266290694}
+  tradeScript: {fileID: 266290698}
 --- !u!114 &293483184
 MonoBehaviour:
   m_ObjectHideFlags: 0
