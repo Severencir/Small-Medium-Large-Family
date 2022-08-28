@@ -205,26 +205,27 @@ public class Attack : MonoBehaviour
         fireBallDamage = 10 + redMod * 2;
         fireBallSpeed = 15 + blueMod;
         fireBallAoe = 1 + greenMod * 0.25f;
-        fireBallCooldown = SpriteManager.red.active / (SpriteManager.red.active + 20);
+        fireBallCooldown = (1 - SpriteManager.red.active / (SpriteManager.red.active + 25f)) * 2;
 
         lightningRange = 3 + blueMod * 2;
         lightningDamage = 10 + redMod;
         lightningBounces = Mathf.RoundToInt(1 + purpleMod);
-        lightningCooldown = SpriteManager.blue.active / (SpriteManager.blue.active + 20);
+        lightningCooldown = (1 - SpriteManager.blue.active / (SpriteManager.blue.active + 25f)) * 2;
 
         auraAoe = 2 + greenMod;
         auraDamage = 10 + redMod;
         auraDuration = 0.5f + yellowMod * 0.5f;
-        auraCooldown = SpriteManager.green.active / (SpriteManager.green.active + 20);
+        auraCooldown = (1 - SpriteManager.green.active / (SpriteManager.green.active + 25f)) * 4;
 
         blockadeAoe = 1 + greenMod * 0.1f;
         blockadeDuration = 3 + yellowMod * 0.5f;
         blockadeQuantity = Mathf.RoundToInt(1 + purpleMod);
-        blockadeCooldown = SpriteManager.yellow.active / (SpriteManager.yellow.active + 20);
+        blockadeCooldown = (1 - SpriteManager.yellow.active / (SpriteManager.yellow.active + 25f)) * 10;
 
         stunDuration = 1 + yellowMod * 0.25f;
         stunQuantity = Mathf.RoundToInt(1 + purpleMod);
         stunSpeed = 15 + blueMod;
-        stunCooldown = SpriteManager.purple.active / (SpriteManager.purple.active + 20);
+        stunCooldown = (1 - SpriteManager.purple.active / (SpriteManager.purple.active + 25f)) * 3;
+        
     }
 }

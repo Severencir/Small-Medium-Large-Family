@@ -54,7 +54,6 @@ public class AudioManager : MonoBehaviour
     public static void Play(string name)
     {
         sounds[name].source.Play();
-        print("sound " + name + " played");
     }
 
     public void ClickMe()
